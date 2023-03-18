@@ -1,7 +1,6 @@
 import java.util.ArrayList;
+import java.io.IOException;
 import java.time.LocalTime;
-
-import java.util.Arrays;
 
 public class BusTimes {
 	private ArrayList<BusTime> timeArrayList;
@@ -11,6 +10,12 @@ public class BusTimes {
 	public void add(BusTime object) {
 		this.timeArrayList.add(object);
 	}
+	
+	public BusTime getLatest() {
+		BusTime busTime = this.timeArrayList.get(0);
+		return busTime;
+	}
+	
 	public BusTime remove(int index) {
 		BusTime busTime = this.timeArrayList.remove(index);
 		return busTime;
@@ -21,6 +26,21 @@ public class BusTimes {
 	
 	public BusTime get(int i) {
 		return this.timeArrayList.get(i);
+	}
+	
+	public void setAllDatas(String url) {
+		Screip screip = new Screip(url);
+		try {
+			screip.setElements();
+			System.out.println("この個数個のデータをセットします" + size());
+			for(int i = 0; i < screip.getSize(); i++) {
+				String[] txts = screip.get_times(i);
+				this.add(new BusTime(txts[0], txts[1]));
+			}
+		}catch(IOException e) {
+		    // 例外が発生したときの処理を書く
+		    e.printStackTrace();
+		}
 	}
 	
 	// 最初に行う操作。現在時刻と一致させる

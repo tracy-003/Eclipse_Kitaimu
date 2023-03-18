@@ -25,7 +25,7 @@ public class Screen implements MouseMotionListener {
 	private int mouseX, mouseY;
 
 	public Screen() {
-		System.out.println("‚±‚±‚ð’Ê‚è‚Ü‚·");
+		//System.out.println("‚±‚±‚ð’Ê‚è‚Ü‚·");
 		this.frame = new JFrame("Kitataimu");
 		this.frame.setUndecorated(true);
 		
