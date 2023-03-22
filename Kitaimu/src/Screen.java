@@ -38,7 +38,7 @@ public class Screen implements MouseMotionListener {
 		// frame.setUndecorated(true);
 		// frame.setBackground(new Color(0,0,255,100));
 		// 5列作成する
-		frame.setLayout(new GridLayout(6, 1));
+		frame.setLayout(new GridLayout(5, 1));
 		frame.setLocationRelativeTo(null); // ウィンドウを画面中央に表示
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setUndecorated(true); // タイトルバーを非表示にする
@@ -59,7 +59,7 @@ public class Screen implements MouseMotionListener {
 		this.frame.getContentPane().add(txt);
 		
 		// 現在の時刻
-		timeLabel = new JLabel("初期状態");
+		timeLabel = new JLabel("起動中です。");
 		timeLabel.setFont(new Font("MSゴシック", Font.PLAIN, 30));
 		timeLabel.setHorizontalAlignment(JLabel.CENTER);
 		timeLabel.setVerticalAlignment(JLabel.TOP);
@@ -72,7 +72,7 @@ public class Screen implements MouseMotionListener {
 			//timeLabel1.setHorizontalAlignment(JLabel.CENTER);
 			// timeLabel1.setVerticalAlignment(JLabel.BOTTOM);
 			this.frame.getContentPane().add(waitLabel);
-			waitLabel.setText("候補です" + i);
+			waitLabel.setText("");
 		}
 		// レイアウトマネージャーの設定
 		// this.frame.setLayout(new BoxLayout(this.frame.getContentPane(),
@@ -81,7 +81,7 @@ public class Screen implements MouseMotionListener {
 		this.frame.setLocationRelativeTo(null);
 		this.frame.setAlwaysOnTop(true); // 画面は常に最前面にある状態にする
 		this.frame.setVisible(true);
-		frame.setSize(300, 250);
+		frame.setSize(300, 200);
 		
 	}
 
@@ -95,7 +95,6 @@ public class Screen implements MouseMotionListener {
 	}
 
 	public void UpdateNowTime(String txt) {
-		//System.out.println("更新後" + txt);
 		this.timeLabel.setText(txt);
 	}
 

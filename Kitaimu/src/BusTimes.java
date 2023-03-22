@@ -32,7 +32,7 @@ public class BusTimes {
 		Screip screip = new Screip(url);
 		try {
 			screip.setElements();
-			System.out.println("この個数個のデータをセットします" + size());
+			//System.out.println("この個数個のデータをセットします" + size());
 			for(int i = 0; i < screip.getSize(); i++) {
 				String[] txts = screip.get_times(i);
 				this.add(new BusTime(txts[0], txts[1]));
@@ -77,7 +77,7 @@ public class BusTimes {
 				data[cnt] = "もうバスがありません";
 			}else {
 				BusTime busTime = this.timeArrayList.get(cnt);
-				data[cnt] = busTime.get_dep();
+				data[cnt] = busTime.get_dep() + " ～ " + busTime.get_arr();
 			}
 			cnt++;
 		}

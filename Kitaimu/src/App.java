@@ -1,4 +1,6 @@
 import java.time.LocalTime;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class App implements Runnable {
 
@@ -12,34 +14,40 @@ public class App implements Runnable {
 
 	@Override
     public void run() {
-		// ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã®ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—
+		// ƒXƒNƒŠ[ƒ“‚ÌƒZƒbƒgƒAƒbƒv
 		Screen screen = new Screen();
-		// æ™‚åˆ»è¡¨ã®ã‚¯ãƒªãƒ¼ãƒ³ã‚¢ãƒƒãƒ—
+		// •\‚ÌƒNƒŠ[ƒ“ƒAƒbƒv
+		Timer timer = new Timer();
 		BusTimes busTimes = new BusTimes();
 		busTimes.setAllDatas(this.url);
 		busTimes.fastAct();
 		screen.UpdateWaitTime(busTimes.getWaitList());
-		// ç¹°ã‚Šè¿”ã—å®Ÿè¡Œã™ã‚‹ãƒ†ã‚­ã‚¹ãƒˆ
-        while (true) {
-        	//System.out.println("test");
-            LocalTime time = LocalTime.now();
-            String hour = String.format("%02d", time.getHour());
-            String minute = String.format("%02d", time.getMinute());
-            String second = String.format("%02d", time.getSecond());
-            screen.UpdateNowTime(hour + ":" + minute + ":" + second);
-            if(second == "00"){
-            	if(juageOver(time, busTimes.getLatest().get_dep())) {
-            		busTimes.fastAct();
-            		screen.UpdateWaitTime(busTimes.getWaitList());
-            	}
-            	
-            } 
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+		// ŒJ‚è•Ô‚µÀs‚·‚éƒeƒLƒXƒg
+		timer.scheduleAtFixedRate(new TimerTask() {
+			@Override
+			public void run() {
+				//System.out.println("test");
+	            LocalTime time = LocalTime.now();
+	            String hour = String.format("%02d", time.getHour());
+	            String minute = String.format("%02d", time.getMinute());
+	            String second = String.format("%02d", time.getSecond());
+	            screen.UpdateNowTime(hour + ":" + minute + ":" + second);
+	            //System.out.println(hour + ":" + minute + ":" + second);
+	            if(second.equals("00")){
+	            	// System.out.println(juageOver(time, busTimes.getLatest().get_dep()));
+	            	if(juageOver(time, busTimes.getLatest().get_dep())) {
+	            		busTimes.remove(0);
+	            		busTimes.fastAct();
+	            		screen.UpdateWaitTime(busTimes.getWaitList());
+	            	}
+	            } 
+	            try {
+	                Thread.sleep(1000);
+	            } catch (InterruptedException e) {
+	                e.printStackTrace();
+	            }
+			}
+		}, 0, 1000);
     }
 
 	public boolean juageOver(LocalTime nowTime, String targetTime) {
