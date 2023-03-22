@@ -12,14 +12,14 @@ public class App implements Runnable {
 
 	@Override
     public void run() {
-		// ƒXƒNƒŠ[ƒ“‚ÌƒZƒbƒgƒAƒbƒv
+		// ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã®ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—
 		Screen screen = new Screen();
-		// •\‚ÌƒNƒŠ[ƒ“ƒAƒbƒv
+		// æ™‚åˆ»è¡¨ã®ã‚¯ãƒªãƒ¼ãƒ³ã‚¢ãƒƒãƒ—
 		BusTimes busTimes = new BusTimes();
 		busTimes.setAllDatas(this.url);
 		busTimes.fastAct();
 		screen.UpdateWaitTime(busTimes.getWaitList());
-		// ŒJ‚è•Ô‚µÀs‚·‚éƒeƒLƒXƒg
+		// ç¹°ã‚Šè¿”ã—å®Ÿè¡Œã™ã‚‹ãƒ†ã‚­ã‚¹ãƒˆ
         while (true) {
         	//System.out.println("test");
             LocalTime time = LocalTime.now();
@@ -27,7 +27,7 @@ public class App implements Runnable {
             String minute = String.format("%02d", time.getMinute());
             String second = String.format("%02d", time.getSecond());
             screen.UpdateNowTime(hour + ":" + minute + ":" + second);
-            if(second == ""){
+            if(second == "00"){
             	if(juageOver(time, busTimes.getLatest().get_dep())) {
             		busTimes.fastAct();
             		screen.UpdateWaitTime(busTimes.getWaitList());
