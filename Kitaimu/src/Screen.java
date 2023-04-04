@@ -1,24 +1,17 @@
-
-//import javax.swing.*;
-
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-import java.util.List;
-import java.util.ArrayList;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
-import java.time.LocalTime;
 
-public class Screen implements MouseMotionListener {
+public class Screen implements MouseMotionListener{
 	private JLabel timeLabel;
 	private JLabel[] waitLabels = new JLabel[3];
 	private JFrame frame;
@@ -43,6 +36,7 @@ public class Screen implements MouseMotionListener {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setUndecorated(true); // タイトルバーを非表示にする
 		frame.setBackground(new Color(0, 255, 0, 100)); // 背景色を透明にする
+		
 		frame.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				mouseX = e.getX();
@@ -50,6 +44,8 @@ public class Screen implements MouseMotionListener {
 			}
 		});
 		frame.addMouseMotionListener(this);
+		frame.addKeyListener(new MyKeyListener());
+		
 		frame.setVisible(true);
 
 		JLabel txt = new JLabel("現在の時刻");
@@ -108,8 +104,32 @@ public class Screen implements MouseMotionListener {
 	}
 
 	public void test() {
-
 		frame.setBackground(new Color(0, 0, 255, 100));
 
+	}
+	
+	public class MyKeyListener implements KeyListener{
+		@Override
+		public void keyPressed(KeyEvent e) {
+			System.out.print("keyPressed");
+			System.out.println(e.getKeyCode());
+			System.out.println(e.getExtendedKeyCode());
+		}
+		@Override
+		public void keyReleased(KeyEvent e) {
+			System.out.print("keyReleased");
+			System.out.println(e.getKeyCode());
+			System.out.println(e.getExtendedKeyCode());
+		}
+		@Override
+		public void keyTyped(KeyEvent e) {
+			System.out.print("keyTyped");
+			System.out.println(e.getKeyCode());
+			System.out.println(e.getExtendedKeyCode());
+			if (e.getExtendedKeyCode() == 28) {
+				System.out.println("変換が押されました");
+			}
+			
+		}
 	}
 }
