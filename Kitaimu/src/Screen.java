@@ -16,6 +16,17 @@ public class Screen implements MouseMotionListener{
 	private JLabel[] waitLabels = new JLabel[3];
 	private JFrame frame;
 	private int mouseX, mouseY;
+	
+	private Color[] colors = {
+      new Color(0, 0, 255, 100)
+      ,new Color(0, 255, 0, 100)
+      ,new Color(255, 0, 0, 100)
+      ,new Color(204, 255, 255, 100)
+      ,new Color( 255, 128, 128, 100)
+      ,new Color( 255, 255, 204, 100)
+	};
+	private int length = this.colors.length;
+	private int colorNum = 1;
 
 	public Screen() {
 		//System.out.println("ここを通ります");
@@ -102,33 +113,50 @@ public class Screen implements MouseMotionListener{
 			label.setText(data);
 		}
 	}
+	
+	private Color getColor() {
+		this.colorNum += 1;
+		if(this.colorNum >= this.length) {
+			this.colorNum -= this.length;
+		}
+		return this.colors[this.colorNum]; 
+	}
 
 	public void test() {
-		frame.setBackground(new Color(0, 0, 255, 100));
-
+		frame.setBackground(getColor());
 	}
 	
 	public class MyKeyListener implements KeyListener{
+		private boolean convertKeyPressed = false;
 		@Override
 		public void keyPressed(KeyEvent e) {
-			System.out.print("keyPressed");
-			System.out.println(e.getKeyCode());
-			System.out.println(e.getExtendedKeyCode());
-		}
+	        if (e.getKeyCode() == KeyEvent.VK_CONVERT) {
+	            convertKeyPressed = true;
+	        } else if (convertKeyPressed && e.getKeyCode() == KeyEvent.VK_C) {
+	        	System.out.println("変換 + C を押しました");
+	        	test();
+	        } else if (convertKeyPressed && e.getKeyCode() == KeyEvent.VK_W) {
+	        	// システムの終了
+	        	System.exit(0);
+	        }
+	    }
 		@Override
 		public void keyReleased(KeyEvent e) {
-			System.out.print("keyReleased");
-			System.out.println(e.getKeyCode());
-			System.out.println(e.getExtendedKeyCode());
+//			System.out.print("keyReleased");
+//			System.out.println(e.getKeyCode());
+//			System.out.println(e.getExtendedKeyCode());
+			if (e.getKeyCode() == KeyEvent.VK_CONVERT) {
+	            convertKeyPressed = false;
+	        }
 		}
 		@Override
 		public void keyTyped(KeyEvent e) {
-			System.out.print("keyTyped");
-			System.out.println(e.getKeyCode());
-			System.out.println(e.getExtendedKeyCode());
-			if (e.getExtendedKeyCode() == 28) {
-				System.out.println("変換が押されました");
-			}
+//			System.out.print("keyTyped");
+//			System.out.println(e.getKeyCode());
+//			System.out.println(e.getExtendedKeyCode());
+//			if (e.getExtendedKeyCode() == 28) {
+//				System.out.println("変換が押されました");
+//			}
 			
 		}
 	}
