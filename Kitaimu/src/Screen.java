@@ -1,8 +1,8 @@
-import java.awt.*;
-import java.awt.event.*;
+
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 
@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
 
 public class Screen implements MouseMotionListener{
 	private JLabel timeLabel;
@@ -39,7 +40,6 @@ public class Screen implements MouseMotionListener{
 		}
 		
 		// frame.setUndecorated(true);
-		// frame.setBackground(new Color(0,0,255,100));
 		// 5列作成する
 		frame.setLayout(new GridLayout(5, 1));
 		frame.setLocationRelativeTo(null); // ウィンドウを画面中央に表示
@@ -141,21 +141,16 @@ public class Screen implements MouseMotionListener{
 	    }
 		@Override
 		public void keyReleased(KeyEvent e) {
-//			System.out.print("keyReleased");
-//			System.out.println(e.getKeyCode());
-//			System.out.println(e.getExtendedKeyCode());
+			// キーが押されなくなったとき
+			//			System.out.print("keyReleased");
+			//			System.out.println(e.getKeyCode());
+			//			System.out.println(e.getExtendedKeyCode());
 			if (e.getKeyCode() == KeyEvent.VK_CONVERT) {
 	            convertKeyPressed = false;
 	        }
 		}
 		@Override
 		public void keyTyped(KeyEvent e) {
-//			System.out.print("keyTyped");
-//			System.out.println(e.getKeyCode());
-//			System.out.println(e.getExtendedKeyCode());
-//			if (e.getExtendedKeyCode() == 28) {
-//				System.out.println("変換が押されました");
-//			}
 			
 		}
 	}
