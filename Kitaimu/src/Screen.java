@@ -29,7 +29,6 @@ public class Screen implements MouseMotionListener{
 	private int colorNum = 1;
 
 	public Screen() {
-		//System.out.println("ã“ã“ã‚’é€šã‚Šã¾ã™");
 		this.frame = new JFrame("Kitataimu");
 		this.frame.setUndecorated(true);
 		
@@ -41,12 +40,12 @@ public class Screen implements MouseMotionListener{
 		
 		// frame.setUndecorated(true);
 		// frame.setBackground(new Color(0,0,255,100));
-		// 5åˆ—ä½œæˆã™ã‚‹
+		// 5—ñì¬‚·‚é
 		frame.setLayout(new GridLayout(5, 1));
-		frame.setLocationRelativeTo(null); // ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’ç”»é¢ä¸­å¤®ã«è¡¨ç¤º
+		frame.setLocationRelativeTo(null); // ƒEƒBƒ“ƒhƒE‚ğ‰æ–Ê’†‰›‚É•\¦
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setUndecorated(true); // ã‚¿ã‚¤ãƒˆãƒ«ãƒãƒ¼ã‚’éè¡¨ç¤ºã«ã™ã‚‹
-		frame.setBackground(new Color(0, 255, 0, 100)); // èƒŒæ™¯è‰²ã‚’é€æ˜ã«ã™ã‚‹
+		frame.setUndecorated(true); // ƒ^ƒCƒgƒ‹ƒo[‚ğ”ñ•\¦‚É‚·‚é
+		frame.setBackground(colors[0]); // ”wŒiF‚ğ“§–¾‚É‚·‚é
 		
 		frame.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
@@ -59,34 +58,34 @@ public class Screen implements MouseMotionListener{
 		
 		frame.setVisible(true);
 
-		JLabel txt = new JLabel("ç¾åœ¨ã®æ™‚åˆ»");
-		txt.setFont(new Font("MSã‚´ã‚·ãƒƒã‚¯", Font.PLAIN, 25));
+		JLabel txt = new JLabel("Œ»İ‚Ì");
+		txt.setFont(new Font("MSƒSƒVƒbƒN", Font.PLAIN, 25));
 		txt.setHorizontalAlignment(JLabel.CENTER);
 		txt.setVerticalAlignment(JLabel.TOP);
 		this.frame.getContentPane().add(txt);
 		
-		// ç¾åœ¨ã®æ™‚åˆ»
-		timeLabel = new JLabel("èµ·å‹•ä¸­ã§ã™ã€‚");
-		timeLabel.setFont(new Font("MSã‚´ã‚·ãƒƒã‚¯", Font.PLAIN, 30));
+		// Œ»İ‚Ì
+		timeLabel = new JLabel("‹N“®’†‚Å‚·B");
+		timeLabel.setFont(new Font("MSƒSƒVƒbƒN", Font.PLAIN, 30));
 		timeLabel.setHorizontalAlignment(JLabel.CENTER);
 		timeLabel.setVerticalAlignment(JLabel.TOP);
 		this.frame.getContentPane().add(timeLabel);
 
-		// å€™è£œï¼‘
+		// Œó•â‚P
 		for(int i = 0 ; i < 3; i++) {
 			JLabel waitLabel = waitLabels[i];
-			waitLabel.setFont(new Font("MSã‚´ã‚·ãƒƒã‚¯", Font.PLAIN, 20));
+			waitLabel.setFont(new Font("MSƒSƒVƒbƒN", Font.PLAIN, 20));
 			//timeLabel1.setHorizontalAlignment(JLabel.CENTER);
 			// timeLabel1.setVerticalAlignment(JLabel.BOTTOM);
 			this.frame.getContentPane().add(waitLabel);
 			waitLabel.setText("");
 		}
-		// ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã®è¨­å®š
+		// ƒŒƒCƒAƒEƒgƒ}ƒl[ƒWƒƒ[‚Ìİ’è
 		// this.frame.setLayout(new BoxLayout(this.frame.getContentPane(),
 		// BoxLayout.Y_AXIS));
 		this.frame.pack();
 		this.frame.setLocationRelativeTo(null);
-		this.frame.setAlwaysOnTop(true); // ç”»é¢ã¯å¸¸ã«æœ€å‰é¢ã«ã‚ã‚‹çŠ¶æ…‹ã«ã™ã‚‹
+		this.frame.setAlwaysOnTop(true); // ‰æ–Ê‚Íí‚ÉÅ‘O–Ê‚É‚ ‚éó‘Ô‚É‚·‚é
 		this.frame.setVisible(true);
 		frame.setSize(300, 200);
 		
@@ -105,7 +104,7 @@ public class Screen implements MouseMotionListener{
 		this.timeLabel.setText(txt);
 	}
 
-	// 3ã¤ã®é…åˆ—
+	// 3‚Â‚Ì”z—ñ
 	public void UpdateWaitTime(String[] datas) {
 		for(int i = 0; i < 3; i++) {
 			JLabel label = waitLabels[i];
@@ -122,7 +121,7 @@ public class Screen implements MouseMotionListener{
 		return this.colors[this.colorNum]; 
 	}
 
-	public void test() {
+	public void Change_Color() {
 		frame.setBackground(getColor());
 	}
 	
@@ -133,14 +132,11 @@ public class Screen implements MouseMotionListener{
 	        if (e.getKeyCode() == KeyEvent.VK_CONVERT) {
 	            convertKeyPressed = true;
 	        } else if (convertKeyPressed && e.getKeyCode() == KeyEvent.VK_C) {
-// 	        	System.out.println("å¤‰æ› + C ã‚’æŠ¼ã—ã¾ã—ãŸ");
-	        	test();
+	        	// System.out.println("•ÏŠ· + C ‚ğ‰Ÿ‚µ‚Ü‚µ‚½");
+	        	Change_Color();
 	        } else if (convertKeyPressed && e.getKeyCode() == KeyEvent.VK_W) {
-	        	// ã‚·ã‚¹ãƒ†ãƒ ã®çµ‚äº†
+	        	// ƒVƒXƒeƒ€‚ÌI—¹
 	        	System.exit(0);
-	        }} else if (convertKeyPressed && e.getKeyCode() == KeyEvent.VK_L) {
-	        	// ãƒªãƒ³ã‚¯ã‚’é–‹ã
-			Open open = Open();
 	        }
 	    }
 		@Override
@@ -158,7 +154,7 @@ public class Screen implements MouseMotionListener{
 //			System.out.println(e.getKeyCode());
 //			System.out.println(e.getExtendedKeyCode());
 //			if (e.getExtendedKeyCode() == 28) {
-//				System.out.println("å¤‰æ›ãŒæŠ¼ã•ã‚Œã¾ã—ãŸ");
+//				System.out.println("•ÏŠ·‚ª‰Ÿ‚³‚ê‚Ü‚µ‚½");
 //			}
 			
 		}
