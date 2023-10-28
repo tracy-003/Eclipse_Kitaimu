@@ -2,9 +2,17 @@ import java.time.LocalTime;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 public class App implements Runnable {
 
 	private String url = "https://www.navitime.co.jp/bus/diagram/timelist?departure=00551329&arrival=00551334&line=00085100";
+	
+	// 各オブジェクトの初期化
+	private Screen screen;
+	private Timer timer;
+	private BusTimes busTimes;
 
 	public static void main(String[] args) {
 		App app = new App();
@@ -14,14 +22,22 @@ public class App implements Runnable {
 
 	@Override
     public void run() {
-		// スクリーンのセットアップ
-		Screen screen = new Screen();
-		// 時刻表のクリーンアップ
-		Timer timer = new Timer();
-		BusTimes busTimes = new BusTimes();
-		busTimes.setAllDatas(this.url);
-		busTimes.fastAct();
-		screen.UpdateWaitTime(busTimes.getWaitList());
+		//画面を設定する
+		try {
+			this.screen = new Screen();
+			// 時刻表のクリーンアップ
+			this.timer = new Timer();
+			this.busTimes = new BusTimes();
+			this.busTimes.setAllDatas(this.url);
+			this.busTimes.fastAct();
+			screen.UpdateWaitTime(this.busTimes.getWaitList());
+		}catch(Exception e) {
+			JFrame frame = new JFrame();
+			JOptionPane.showMessageDialog(frame, e);
+			// 時刻を取得できなかったりしたら、アプリの終了
+			System.exit(0);
+		}
+
 		// 繰り返し実行するテキスト
 		timer.scheduleAtFixedRate(new TimerTask() {
 			@Override
@@ -34,11 +50,13 @@ public class App implements Runnable {
 	            screen.UpdateNowTime(hour + ":" + minute + ":" + second);
 	            //System.out.println(hour + ":" + minute + ":" + second);
 	            if(second.equals("00")){
-	            	// System.out.println(juageOver(time, busTimes.getLatest().get_dep()));
-	            	if(juageOver(time, busTimes.getLatest().get_dep())) {
-	            		busTimes.remove(0);
-	            		busTimes.fastAct();
-	            		screen.UpdateWaitTime(busTimes.getWaitList());
+	            	// System.out.println(juageOver(time, this.busTimes.getLatest().get_dep()));
+	            	if(busTimes.size() != 0) {
+	            		 if(juageOver(time, busTimes.getLatest().get_dep())) {
+	            			 busTimes.remove(0);
+	            			 busTimes.fastAct();
+	            			 screen.UpdateWaitTime(busTimes.getWaitList());
+	            		 }
 	            	}
 	            } 
 	            try {
